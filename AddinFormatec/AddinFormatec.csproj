@@ -1,0 +1,469 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0247C45E-9282-48D5-9C70-D8EF03A539EE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AddinFormatec</RootNamespace>
+    <AssemblyName>AddinFormatec</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
+      <HintPath>..\packages\BouncyCastle.Cryptography.2.4.0\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.4, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.4\lib\net461\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="LmCorbieUI">
+      <HintPath>..\..\..\..\LmCorbieUI\LmCorbieUI\bin\Debug\LmCorbieUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.HashCode.1.1.1\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.5.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.5.0.0\lib\net461\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Core, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8afb38e9204fc0a9, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack.8.0.4\lib\net48\Microsoft.WindowsAPICodePack.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.ExtendedLinguisticServices, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8afb38e9204fc0a9, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack.8.0.4\lib\net48\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Sensors, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8afb38e9204fc0a9, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack.8.0.4\lib\net48\Microsoft.WindowsAPICodePack.Sensors.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8afb38e9204fc0a9, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack.8.0.4\lib\net48\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.ShellExtensions, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8afb38e9204fc0a9, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack.8.0.4\lib\net48\Microsoft.WindowsAPICodePack.ShellExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Npgsql, Version=4.0.6.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.4.0.6\lib\net451\Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="SolidWorks.Interop.sldworks">
+      <HintPath>..\..\..\..\00 - Dlls\SW2022\SolidWorks.Interop.sldworks.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="SolidWorks.Interop.swcommands">
+      <HintPath>..\..\..\..\00 - Dlls\SW2022\SolidWorks.Interop.swcommands.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="SolidWorks.Interop.swconst">
+      <HintPath>..\..\..\..\00 - Dlls\SW2022\SolidWorks.Interop.swconst.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="SolidWorks.Interop.swdocumentmgr">
+      <HintPath>..\..\..\..\00 - Dlls\SW2022\SolidWorks.Interop.swdocumentmgr.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="SolidWorks.Interop.swpublished">
+      <HintPath>..\..\..\..\00 - Dlls\SW2022\SolidWorks.Interop.swpublished.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.5.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.118.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.118.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.118.0\lib\net46\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.118.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.118.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.2\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.3.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.5.1\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=2.0.0.11, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.2.0.0.11\lib\net40\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Channels, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Channels.4.7.0\lib\netstandard2.0\System.Threading.Channels.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack.8.0.4\lib\net48\System.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsFormsIntegration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack.8.0.4\lib\net48\WindowsFormsIntegration.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="01_painel_tarefas\Addin.cs" />
+    <Compile Include="02_formularios\FrmCodigoCad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="02_formularios\FrmCodigoCad.Designer.cs">
+      <DependentUpon>FrmCodigoCad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="02_formularios\FrmConfiguracao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="02_formularios\FrmConfiguracao.Designer.cs">
+      <DependentUpon>FrmConfiguracao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="02_formularios\FrmDesenho.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="02_formularios\FrmDesenho.Designer.cs">
+      <DependentUpon>FrmDesenho.cs</DependentUpon>
+    </Compile>
+    <Compile Include="02_formularios\FrmExportar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="02_formularios\FrmExportar.Designer.cs">
+      <DependentUpon>FrmExportar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="02_formularios\FrmFileProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="02_formularios\FrmFileProperties.Designer.cs">
+      <DependentUpon>FrmFileProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="02_formularios\FrmFormatosAtualizar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="02_formularios\FrmFormatosAtualizar.Designer.cs">
+      <DependentUpon>FrmFormatosAtualizar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="02_formularios\FrmMateriaPrimaCad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="02_formularios\FrmMateriaPrimaCad.Designer.cs">
+      <DependentUpon>FrmMateriaPrimaCad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="02_formularios\FrmPackList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="02_formularios\FrmPackList.Designer.cs">
+      <DependentUpon>FrmPackList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="02_formularios\FrmPastaFormas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="02_formularios\FrmPastaFormas.Designer.cs">
+      <DependentUpon>FrmPastaFormas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="02_formularios\FrmPastaMaquinas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="02_formularios\FrmPastaMaquinas.Designer.cs">
+      <DependentUpon>FrmPastaMaquinas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="02_formularios\FrmPastaProcessos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="02_formularios\FrmPastaProcessos.Designer.cs">
+      <DependentUpon>FrmPastaProcessos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="02_formularios\FrmProcesso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="02_formularios\FrmProcesso.Designer.cs">
+      <DependentUpon>FrmProcesso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="02_formularios\FrmProdutoImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="02_formularios\FrmProdutoImport.Designer.cs">
+      <DependentUpon>FrmProdutoImport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="03_classes\01_tabelas\vw_processo.cs" />
+    <Compile Include="03_classes\02_solid\Produto.cs" />
+    <Compile Include="03_classes\02_solid\TreeComponent.cs" />
+    <Compile Include="03_classes\03_sqlite\00_contexto\SQLiteConfiguration.cs" />
+    <Compile Include="03_classes\03_sqlite\00_contexto\SQLiteContexto.cs" />
+    <Compile Include="03_classes\01_tabelas\vw_um.cs" />
+    <Compile Include="03_classes\01_tabelas\vw_grupo_subgrupo.cs" />
+    <Compile Include="03_classes\01_tabelas\pw_grupo_produto.cs" />
+    <Compile Include="03_classes\01_tabelas\vw_produto.cs" />
+    <Compile Include="03_classes\02_solid\ComponenteEstrutura.cs" />
+    <Compile Include="03_classes\02_solid\Desenho.cs" />
+    <Compile Include="03_classes\02_solid\DesenhosAtualizar.cs" />
+    <Compile Include="03_classes\02_solid\DrawExport.cs" />
+    <Compile Include="03_classes\03_sqlite\02_tabelas\CodigoMaquina.cs" />
+    <Compile Include="03_classes\03_sqlite\02_tabelas\PostgresAccess.cs" />
+    <Compile Include="03_classes\03_sqlite\02_tabelas\MateriaPrima.cs" />
+    <Compile Include="03_classes\02_solid\Config_db.cs" />
+    <Compile Include="03_classes\02_solid\PackList.cs" />
+    <Compile Include="03_classes\02_solid\ProcessoFabricacao.cs" />
+    <Compile Include="03_classes\02_solid\Z_Padrao.cs" />
+    <Compile Include="03_classes\03_sqlite\01_helper\ConexaoSQLite.cs" />
+    <Compile Include="03_classes\03_sqlite\01_helper\SemearBase.cs" />
+    <Compile Include="03_classes\03_sqlite\02_tabelas\Config.cs" />
+    <Compile Include="03_classes\03_sqlite\02_tabelas\FormatoFolha.cs" />
+    <Compile Include="04_enums\Enums.cs" />
+    <Compile Include="05_helper\ConexaoPgSql.cs" />
+    <Compile Include="02_formularios\FrmProdutoCad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="02_formularios\FrmProdutoCad.Designer.cs">
+      <DependentUpon>FrmProdutoCad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="03_classes\01_tabelas\vw_operacao.cs" />
+    <Compile Include="03_classes\02_solid\Componente.cs" />
+    <Compile Include="03_classes\02_solid\InfoSetting.cs" />
+    <Compile Include="03_classes\02_solid\ListaCorte.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="01_painel_tarefas\UcPainelTarefas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="01_painel_tarefas\UcPainelTarefas.Designer.cs">
+      <DependentUpon>UcPainelTarefas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="03_classes\02_solid\W_Componente.cs" />
+    <Compile Include="Relatorios\FrmRelatorio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Relatorios\FrmRelatorio.designer.cs">
+      <DependentUpon>FrmRelatorio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="01_painel_tarefas\UcPainelTarefas.resx">
+      <DependentUpon>UcPainelTarefas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="02_formularios\FrmCodigoCad.resx">
+      <DependentUpon>FrmCodigoCad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="02_formularios\FrmConfiguracao.resx">
+      <DependentUpon>FrmConfiguracao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="02_formularios\FrmDesenho.resx">
+      <DependentUpon>FrmDesenho.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="02_formularios\FrmExportar.resx">
+      <DependentUpon>FrmExportar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="02_formularios\FrmFileProperties.resx">
+      <DependentUpon>FrmFileProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="02_formularios\FrmFormatosAtualizar.resx">
+      <DependentUpon>FrmFormatosAtualizar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="02_formularios\FrmMateriaPrimaCad.resx">
+      <DependentUpon>FrmMateriaPrimaCad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="02_formularios\FrmPackList.resx">
+      <DependentUpon>FrmPackList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="02_formularios\FrmPastaFormas.resx">
+      <DependentUpon>FrmPastaFormas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="02_formularios\FrmPastaMaquinas.resx">
+      <DependentUpon>FrmPastaMaquinas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="02_formularios\FrmPastaProcessos.resx">
+      <DependentUpon>FrmPastaProcessos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="02_formularios\FrmProcesso.resx">
+      <DependentUpon>FrmProcesso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="02_formularios\FrmProdutoCad.resx">
+      <DependentUpon>FrmProdutoCad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="02_formularios\FrmProdutoImport.resx">
+      <DependentUpon>FrmProdutoImport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Relatorios\FrmRelatorio.resx">
+      <DependentUpon>FrmRelatorio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Relatorios\rptCapaPackList.rdlc" />
+    <EmbeddedResource Include="Relatorios\rptListaMateriais.rdlc" />
+    <EmbeddedResource Include="Relatorios\rptPackList.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="03_classes\03_sqlite\03_impresao\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\DrawExport.datasource" />
+    <None Include="Properties\DataSources\PackList.datasource" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="favicon.ico" />
+    <None Include="Resources\trv_material.png" />
+    <None Include="Resources\trv_part.png" />
+    <None Include="Resources\trv_assembly.png" />
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>rd "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC\AddinFormatec\bin\Debug\de" /s/q
+rd "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC\AddinFormatec\bin\Debug\es" /s/q
+rd "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC\AddinFormatec\bin\Debug\fr" /s/q
+rd "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC\AddinFormatec\bin\Debug\it" /s/q
+rd "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC\AddinFormatec\bin\Debug\ja" /s/q
+rd "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC\AddinFormatec\bin\Debug\ko" /s/q
+rd "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC\AddinFormatec\bin\Debug\pt" /s/q
+rd "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC\AddinFormatec\bin\Debug\ru" /s/q
+rd "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC\AddinFormatec\bin\Debug\zh-CHS" /s/q
+rd "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC\AddinFormatec\bin\Debug\zh-CHT" /s/q
+
+del "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC\AddinFormatec\bin\Debug\AddinFormatec.pdb"
+del "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC\AddinFormatec\bin\Debug\LmCorbieUI.pdb"
+
+xcopy "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC INSTALL\Atualizador\AtualizarAddin.bat" "C:\Temp" /Y /A /V
+call  "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC INSTALL\Atualizador\AttOnBuildAddin.exe"</PostBuildEvent>
+  </PropertyGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este projeto faz referência a pacotes do NuGet que não estão presentes neste computador. Use a Restauração de Pacotes do NuGet para baixá-los.  Para obter mais informações, consulte http://go.microsoft.com/fwlink/?LinkID=322105. O arquivo ausente é {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
+  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
+</Project>
