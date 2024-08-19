@@ -101,23 +101,23 @@
       <HintPath>..\packages\Npgsql.4.0.6\lib\net451\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="SolidWorks.Interop.sldworks">
-      <HintPath>..\..\..\..\00 - Dlls\SW2022\SolidWorks.Interop.sldworks.dll</HintPath>
+      <HintPath>P:\Projetos Leonardo\00 - Dlls\SW2022\SolidWorks.Interop.sldworks.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="SolidWorks.Interop.swcommands">
-      <HintPath>..\..\..\..\00 - Dlls\SW2022\SolidWorks.Interop.swcommands.dll</HintPath>
+      <HintPath>P:\Projetos Leonardo\00 - Dlls\SW2022\SolidWorks.Interop.swcommands.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="SolidWorks.Interop.swconst">
-      <HintPath>..\..\..\..\00 - Dlls\SW2022\SolidWorks.Interop.swconst.dll</HintPath>
+      <HintPath>P:\Projetos Leonardo\00 - Dlls\SW2022\SolidWorks.Interop.swconst.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="SolidWorks.Interop.swdocumentmgr">
-      <HintPath>..\..\..\..\00 - Dlls\SW2022\SolidWorks.Interop.swdocumentmgr.dll</HintPath>
+      <HintPath>P:\Projetos Leonardo\00 - Dlls\SW2022\SolidWorks.Interop.swdocumentmgr.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="SolidWorks.Interop.swpublished">
-      <HintPath>..\..\..\..\00 - Dlls\SW2022\SolidWorks.Interop.swpublished.dll</HintPath>
+      <HintPath>P:\Projetos Leonardo\00 - Dlls\SW2022\SolidWorks.Interop.swpublished.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
@@ -439,22 +439,22 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>rd "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC\AddinFormatec\bin\Debug\de" /s/q
-rd "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC\AddinFormatec\bin\Debug\es" /s/q
-rd "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC\AddinFormatec\bin\Debug\fr" /s/q
-rd "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC\AddinFormatec\bin\Debug\it" /s/q
-rd "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC\AddinFormatec\bin\Debug\ja" /s/q
-rd "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC\AddinFormatec\bin\Debug\ko" /s/q
-rd "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC\AddinFormatec\bin\Debug\pt" /s/q
-rd "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC\AddinFormatec\bin\Debug\ru" /s/q
-rd "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC\AddinFormatec\bin\Debug\zh-CHS" /s/q
-rd "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC\AddinFormatec\bin\Debug\zh-CHT" /s/q
+    <PostBuildEvent>rd "C:\repositorio_corbie\00_CLIENTES\addin-formatec\AddinFormatec\bin\Debug\de" /s/q
+rd "C:\repositorio_corbie\00_CLIENTES\addin-formatec\AddinFormatec\bin\Debug\es" /s/q
+rd "C:\repositorio_corbie\00_CLIENTES\addin-formatec\AddinFormatec\bin\Debug\fr" /s/q
+rd "C:\repositorio_corbie\00_CLIENTES\addin-formatec\AddinFormatec\bin\Debug\it" /s/q
+rd "C:\repositorio_corbie\00_CLIENTES\addin-formatec\AddinFormatec\bin\Debug\ja" /s/q
+rd "C:\repositorio_corbie\00_CLIENTES\addin-formatec\AddinFormatec\bin\Debug\ko" /s/q
+rd "C:\repositorio_corbie\00_CLIENTES\addin-formatec\AddinFormatec\bin\Debug\pt" /s/q
+rd "C:\repositorio_corbie\00_CLIENTES\addin-formatec\AddinFormatec\bin\Debug\ru" /s/q
+rd "C:\repositorio_corbie\00_CLIENTES\addin-formatec\AddinFormatec\bin\Debug\zh-CHS" /s/q
+rd "C:\repositorio_corbie\00_CLIENTES\addin-formatec\AddinFormatec\bin\Debug\zh-CHT" /s/q
 
-del "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC\AddinFormatec\bin\Debug\AddinFormatec.pdb"
-del "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC\AddinFormatec\bin\Debug\LmCorbieUI.pdb"
+del "C:\repositorio_corbie\00_CLIENTES\addin-formatec\AddinFormatec\bin\Debug\AddinFormatec.pdb"
+del "C:\repositorio_corbie\00_CLIENTES\addin-formatec\AddinFormatec\bin\Debug\LmCorbieUI.pdb"
 
-xcopy "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC INSTALL\Atualizador\AtualizarAddin.bat" "C:\Temp" /Y /A /V
-call  "P:\Projetos Leonardo\01 - Clientes\06 - FORMATEC\02 - ADDIN FORMATEC INSTALL\Atualizador\AttOnBuildAddin.exe"</PostBuildEvent>
+xcopy "C:\repositorio_corbie\00_CLIENTES\addin-formatec\Instalador\Atualizador\AtualizarAddin.bat" "C:\Temp" /Y /A /V
+call  "C:\repositorio_corbie\00_CLIENTES\addin-formatec\Instalador\Atualizador\AttOnBuildAddin.exe"</PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

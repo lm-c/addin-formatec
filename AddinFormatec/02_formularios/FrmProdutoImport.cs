@@ -7,10 +7,8 @@ using LmCorbieUI.LmForms;
 using LmCorbieUI.Metodos;
 using System.Collections.Generic;
 using System.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Drawing;
 using System.IO;
-using System.Security.Cryptography;
 
 namespace AddinFormatec {
   public partial class FrmProdutoImport : LmChildForm {
