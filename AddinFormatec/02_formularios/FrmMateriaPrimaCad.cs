@@ -2,6 +2,7 @@
 using LmCorbieUI.LmForms;
 using LmCorbieUI.Metodos;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -24,6 +25,7 @@ namespace AddinFormatec {
 
     private void BtnLimpar_Click(object sender, EventArgs e) {
       txtID.ReadOnly = false;
+      btnExcluir.Enabled = false;
       txtEspessura.Focus();
       txtID.Text = txtEspessura.Text =  string.Empty;
       txtMaterial.SelectedValue = null;
@@ -34,24 +36,38 @@ namespace AddinFormatec {
     private void BtnSalvar_Click(object sender, EventArgs e) {
       if (Controles.PossuiCamposInvalidos(this)) return;
 
-      var chapa = (vw_produto)txtMaterial.SelectedItem;
+      try {
+        var chapa = ((List<vw_produto>)txtMaterial.CmbDados.DataSource).FirstOrDefault(x => x.codigo_produto == txtMaterial.SelectedValue.ToString());
 
-      MateriaPrima.model.Espessura = Convert.ToDouble(txtEspessura.Text);
-      MateriaPrima.model.ChapaID = chapa.codigo_produto;
-      MateriaPrima.model.ChapaDesc = chapa.descricao_produto;
-      MateriaPrima.model.MaterialDesc = chapa.subgrupo_produto_desc;
-      MateriaPrima.model.Ativo = ckbSituacao.Checked;
+        MateriaPrima.model.Espessura = Convert.ToDouble(txtEspessura.Text);
+        MateriaPrima.model.ChapaID = chapa.codigo_produto;
+        MateriaPrima.model.ChapaDesc = chapa.descricao_produto;
+        MateriaPrima.model.MaterialDesc = chapa.subgrupo_produto_desc;
+        MateriaPrima.model.Ativo = ckbSituacao.Checked;
 
-      if (MateriaPrima.ListaMateriaPrima.Any(x => x.ID != MateriaPrima.model.ID && x.ChapaDesc == MateriaPrima.model.ChapaDesc)) {
-        Toast.Warning("Já existe um registro com esta mesma descrição!");
-      } else {
-        MateriaPrima.Salvar(); Toast.Info("Salvo com Sucesso!");
-        BtnLimpar_Click(sender, new EventArgs());
+        if (MateriaPrima.ListaMateriaPrima.Any(x => x.ID != MateriaPrima.model.ID && x.ChapaDesc == MateriaPrima.model.ChapaDesc)) {
+          Toast.Warning("Já existe um registro com esta mesma descrição!");
+        } else {
+          MateriaPrima.Salvar(); 
+          Toast.Info("Salvo com Sucesso!");
+          BtnLimpar_Click(sender, new EventArgs());
+        }
+      } catch (Exception ex) {
+        LmException.ShowException(ex, "Erro ao Cadastrar Matéria Prima");
       }
     }
 
     private void BtnExcluir_Click(object sender, EventArgs e) {
-
+      try {
+        if (MsgBox.Show("Deseja realmente excluir este registro?", 
+          "Excluir Registro", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+          MateriaPrima.Excluir();
+          Toast.Info("Excluido com Sucesso!");
+          BtnLimpar_Click(sender, new EventArgs());
+        }
+      } catch (Exception ex) {
+        LmException.ShowException(ex, "Erro ao Cadastrar Matéria Prima");
+      }
     }
 
     private void TxtID_ButtonClickF7(object sender, EventArgs e) {
@@ -77,6 +93,7 @@ namespace AddinFormatec {
         txtMaterial.Text = MateriaPrima.model.ChapaDesc;
 
         txtID.ReadOnly = true;
+        btnExcluir.Enabled = true;
       }
     }
 

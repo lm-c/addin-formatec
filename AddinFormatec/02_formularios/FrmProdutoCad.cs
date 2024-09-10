@@ -97,7 +97,7 @@ namespace AddinFormatec {
 
     private void TxtGrupo_SelectedValueChanched(object sender, EventArgs e) {
       if (txtGrupo.SelectedValue != null) {
-        var idGrupo = (int)txtGrupo.SelectedValue;
+        var idGrupo = (short)txtGrupo.SelectedValue;
         txtSubGrupo.CarregarComboBox(vw_grupo_subgrupo.SelecionarSubGrupos(idGrupo));
       } else {
         txtSubGrupo.CarregarComboBox(null);

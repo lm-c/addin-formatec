@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AddinFormatec {
   internal class vw_grupo_subgrupo {
@@ -20,7 +17,7 @@ namespace AddinFormatec {
     [DataObjectField(false, true)]
     public string descricao_subgrupo { get; set; }
 
-    public static List<vw_grupo_subgrupo> SelecionarSubGrupos(int idGrupo) {
+    public static List<vw_grupo_subgrupo> SelecionarSubGrupos(short idGrupo) {
       var _return = new List<vw_grupo_subgrupo>();
       try {
         using (var connection = ConexaoPgSql.GetConexao()) {

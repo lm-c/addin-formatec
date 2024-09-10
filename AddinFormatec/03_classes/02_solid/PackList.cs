@@ -65,12 +65,12 @@ namespace AddinFormatec {
         packListEstrutura.Denominacao = resolvedValOut;
 
         // Inserir lista de material e pegar dados
-        string lista = Config.model.ListaMontagem;
+        string templateGeral = $"{Application.StartupPath}\\01 - Addin Formatec\\ListaComponentes.sldbomtbt";
 
         int BomType = (int)swBomType_e.swBomType_Indented;
         int NumberingType = (int)swNumberingType_e.swNumberingType_Detailed;
 
-        var swBOMAnnotation = swModelDocExt.InsertBomTable3(lista, 0, 1, BomType, swConf.Name, Hidden: false, NumberingType, DetailedCutList: true);
+        var swBOMAnnotation = swModelDocExt.InsertBomTable3(templateGeral, 0, 1, BomType, swConf.Name, Hidden: false, NumberingType, DetailedCutList: true);
         PegaDadosLista(swApp, swBOMAnnotation, packListEstrutura, descricaoVolumes);
 
         ListaCorte.ExcluirLista(swModel);
@@ -120,17 +120,17 @@ namespace AddinFormatec {
 
         var swBOMFeature = swBOMAnnotation.BomFeature;
 
-        for (int i = lStartRow; i >= 0; i--) {
+        for (int i = 0; i < swTableAnnotation.TotalRowCount; i++) {
           vModelPathNames = (string[])swBOMAnnotation.GetModelPathNames(i, out strItemNumber, out strPartNumber);
 
           if (vModelPathNames != null) {
             string pathName = vModelPathNames[0];
-            var nomeComp = swTableAnnotation.get_Text(i, 1).Trim();
+            var nomeComp = swTableAnnotation.get_Text(i, 2).Trim();
 
             if (string.IsNullOrEmpty(nomeComp))
               continue;
 
-            if (int.TryParse(swTableAnnotation.get_Text(i, 3).Trim(), out int qtd)) {
+            if (int.TryParse(swTableAnnotation.get_Text(i, 1).Trim(), out int qtd)) {
               ModelDoc2 swModel = default(ModelDoc2);
               if (Path.GetExtension(pathName).ToLower() == ".sldprt")
                 swModel = (ModelDoc2)swApp.OpenDoc(pathName, (int)swDocumentTypes_e.swDocPART);
@@ -152,7 +152,7 @@ namespace AddinFormatec {
                 packListnew.PathName = pathName;
                 packListnew.Nivel = "1." + swTableAnnotation.get_Text(i, 0);
                 packListnew.Quantidade = qtd;
-                packListnew.Denominacao = swTableAnnotation.get_Text(i, 2).Trim();
+                packListnew.Denominacao = swTableAnnotation.get_Text(i, 4).Trim();
                 packListnew.ConfigName = swConf.Name;
 
                 CustomPropertyManager swCustPropMngr = swModelDocExt.get_CustomPropertyManager("");

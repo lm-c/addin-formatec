@@ -49,10 +49,10 @@ namespace AddinFormatec {
 
         if (swModel.GetType() == (int)swDocumentTypes_e.swDocASSEMBLY) {
           // Inserir lista de material e pegar dados
-          string templateGeral = Config.model.ListaMontagem;
+          string templateGeral = $"{Application.StartupPath}\\01 - Addin Formatec\\ListaComponentes.sldbomtbt";
           int BomTypeGeral = (int)swBomType_e.swBomType_Indented;
           int NumberingType = (int)swNumberingType_e.swNumberingType_Detailed;
-          var swBOMAnnotationGeral = swModelDocExt.InsertBomTable3(templateGeral, 0, 1, BomTypeGeral, swConf.Name, Hidden: false, NumberingType, DetailedCutList: true);
+          var swBOMAnnotationGeral = swModelDocExt.InsertBomTable3(templateGeral, 0, 1, BomTypeGeral, swConf.Name, Hidden: false, NumberingType, DetailedCutList: false);
           PegaDadosListaGeral(swBOMAnnotationGeral, listaDesenhos);
           ListaCorte.ExcluirLista(swModel);
         }
@@ -78,20 +78,20 @@ namespace AddinFormatec {
 
         var swBOMFeature = swBOMAnnotation.BomFeature;
 
-        for (int i = lStartRow; i >= 0; i--) {
+        for (int i = 0; i < swTableAnnotation.TotalRowCount; i++) {
           vModelPathNames = (string[])swBOMAnnotation.GetModelPathNames(i, out strItemNumber, out strPartNumber);
 
           if (vModelPathNames != null) {
             var desenho = new Desenho();
             desenho.PathName = vModelPathNames[0];
 
-            if (string.IsNullOrEmpty(swTableAnnotation.get_Text(i, 1).Trim()))
+            if (!string.IsNullOrEmpty(swTableAnnotation.get_Text(i, 3).Trim()))
               continue;
 
             if (desenho.PathName.ToUpper().Contains("BIBLIOTECA") || desenho.PathName.ToUpper().Contains("ESQ"))
               continue;
 
-            if (int.TryParse(swTableAnnotation.get_Text(i, 3).Trim(), out int qtd)) {
+            if (int.TryParse(swTableAnnotation.get_Text(i, 1).Trim(), out int qtd)) {
               string PathNameDesenho = desenho.PathName.Substring(0, desenho.PathName.Length - 6) + "SLDDRW";
 
               if (desenho.PathName.ToUpper().EndsWith("SLDASM"))
@@ -105,7 +105,7 @@ namespace AddinFormatec {
                 desenho.TemDesenho = "Não";
 
               desenho.ShortName = Path.GetFileNameWithoutExtension(PathNameDesenho);
-              desenho.Denominacao = swTableAnnotation.get_Text(i, 2).Trim();
+              desenho.Denominacao = swTableAnnotation.get_Text(i, 4).Trim();
 
               if (!listaDesenhos.Any(x => x.ShortName == desenho.ShortName))
                 listaDesenhos.Add(desenho);

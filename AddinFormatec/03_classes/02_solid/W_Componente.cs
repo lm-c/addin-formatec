@@ -84,7 +84,7 @@ namespace AddinFormatec {
           _listaFinal.Add(componente);
 
           // Inserir lista de material e pegar dados
-          string templateGeral = Config.model.ListaMontagem;
+          string templateGeral = $"{Application.StartupPath}\\01 - Addin Formatec\\ListaComponentes.sldbomtbt";
           int BomTypeGeral = (int)swBomType_e.swBomType_Indented;
           int NumberingType = (int)swNumberingType_e.swNumberingType_Detailed;
           var swBOMAnnotationGeral = swModelDocExt.InsertBomTable3(templateGeral, 0, 1, BomTypeGeral, swConf.Name, Hidden: false, NumberingType, DetailedCutList: true);
@@ -126,7 +126,7 @@ namespace AddinFormatec {
 
         var swBOMFeature = swBOMAnnotation.BomFeature;
 
-        for (int i = lStartRow; i >= 0; i--) {
+        for (int i = 0; i < swTableAnnotation.TotalRowCount; i++) {
           vModelPathNames = (string[])swBOMAnnotation.GetModelPathNames(i, out strItemNumber, out strPartNumber);
 
           if (vModelPathNames != null) {
@@ -134,14 +134,14 @@ namespace AddinFormatec {
             string ptNm = vModelPathNames[0];
 
             componente.PathName = ptNm;
-            componente.NomeComponente = swTableAnnotation.get_Text(i, 1).Trim();
+            componente.NomeComponente = Path.GetFileNameWithoutExtension(ptNm).ToUpper();
 
             if (string.IsNullOrEmpty(componente.NomeComponente))
               continue;
 
-            if (int.TryParse(swTableAnnotation.get_Text(i, 3).Trim(), out int qtd)) {
+            if (int.TryParse(swTableAnnotation.get_Text(i, 1).Trim(), out int qtd)) {
               componente.Quantidade = qtd;
-              componente.Denominacao = swTableAnnotation.get_Text(i, 2).Trim();
+              componente.Denominacao = swTableAnnotation.get_Text(i, 4).Trim();
 
               //bool isSheetMetal = IsSheetMetal(swApp, componente.PathName, fecharPeca: true);
               if (!listaComponentes.Any(x => x.NomeComponente == componente.NomeComponente))

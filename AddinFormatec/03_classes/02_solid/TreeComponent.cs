@@ -8,17 +8,26 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.ComponentModel;
 
 namespace AddinFormatec {
   internal class TreeComponent {
 
     public string codigo { get; set; }
+    public string nivel_fabril { get; set; }
     public string descricao { get; set; }
     public string pathName { get; set; }
     public string configName { get; set; }
-    public string grupo { get; set; }
-    public string subGrupo { get; set; }
-    public string um { get; set; }
+    public short? grupo { get; set; }
+    public short? subGrupo { get; set; }
+    public string um1 { get; set; }
+    //public string um2 { get; set; }
+    public double qtd1 { get; set; }
+    //public double qtd2 { get; set; }
+    public double peso { get; set; }
+    public double espe { get; set; }
+    public double larg { get; set; }
+    public double comp { get; set; }
     public string operacao { get; set; }
     public TipoComponente tipoComponente { get; set; }
 
@@ -69,10 +78,10 @@ namespace AddinFormatec {
         var process = resolvedValOut;
 
         swCustPropMgr.Get2("sgl_GrupoProduto", out valOut, out resolvedValOut);
-        var grupoProduto = resolvedValOut;
+        var grupoProduto = !string.IsNullOrEmpty(resolvedValOut) ? Convert.ToInt16(resolvedValOut) : new short?();
 
         swCustPropMgr.Get2("sgl_SubgrupoProduto", out valOut, out resolvedValOut);
-        var subgrupoProduto = resolvedValOut;
+        var subgrupoProduto = !string.IsNullOrEmpty(resolvedValOut) ? Convert.ToInt16(resolvedValOut) : new short?();
 
         swCustPropMgr.Get2("sgl_UM", out valOut, out resolvedValOut);
         var um = resolvedValOut;
@@ -87,6 +96,7 @@ namespace AddinFormatec {
         swCustPropMgr = swModelDocExt.get_CustomPropertyManager(swConf.Name);
         var tipo = tipoDoc == swDocumentTypes_e.swDocASSEMBLY ? TipoComponente.Montagem : TipoComponente.Peca;
         TreeComponent componente = new TreeComponent {
+          nivel_fabril = "0",
           codigo = cod,
           descricao = descRoot,
           pathName = swModel.GetPathName(),
@@ -94,16 +104,17 @@ namespace AddinFormatec {
           tipoComponente = tipo,
           grupo = grupoProduto,
           subGrupo = subgrupoProduto,
-          um = um,
+          um1 = um,
+          qtd1 = 1,
           operacao = process,
         };
 
         rootNode = treeView.Nodes.Add("Root", $"{cod} - {descRoot}");
         rootNode.Tag = componente;
 
-        if (string.IsNullOrEmpty(componente.grupo) ||
-          string.IsNullOrEmpty(componente.subGrupo) ||
-          string.IsNullOrEmpty(componente.um) ||
+        if (componente.grupo == null ||
+          componente.subGrupo == null ||
+          string.IsNullOrEmpty(componente.um1) ||
           string.IsNullOrEmpty(componente.operacao)) {
           rootNode.ForeColor = Color.Red;
         }
@@ -115,10 +126,14 @@ namespace AddinFormatec {
           string templateGeral = $"{Application.StartupPath}\\01 - Addin Formatec\\ListaComponentes.sldbomtbt";
           int BomTypeGeral = (int)swBomType_e.swBomType_Indented;
           int NumberingType = (int)swNumberingType_e.swNumberingType_Detailed;
-          var swBOMAnnotationGeral = swModelDocExt.InsertBomTable3(templateGeral, 0, 1, BomTypeGeral, swConf.Name, Hidden: false, NumberingType, DetailedCutList: true);
+          bool DetailedCutList = true;
+          var swBOMAnnotationGeral = swModelDocExt.InsertBomTable3(templateGeral, 0, 1, BomTypeGeral, swConf.Name, Hidden: false, NumberingType, DetailedCutList);
           PegaDadosListaGeral(swApp, swBOMAnnotationGeral, treeView, rootNode);
           ListaCorte.ExcluirLista(swModel);
-        } else {
+        }
+
+        /*
+        else {
           FeatureManager swFeatMgr = swModel.FeatureManager;
           Feature swFeat = swModel.FirstFeature();
 
@@ -156,14 +171,15 @@ namespace AddinFormatec {
                   var processList = sResolvedvalue.ToString();
 
                   TreeComponent componenteLista = new TreeComponent {
+                    nivel_fabril = " 1",
                     codigo = codMat,
                     descricao = descMat,
                     pathName = swModel.GetPathName(),
                     configName = swConf.Name,
                     tipoComponente = TipoComponente.ListaMaterial,
-                    grupo = string.Empty,
-                    subGrupo = string.Empty,
-                    um = string.Empty,
+                    grupo = null,
+                    subGrupo = null,
+                    um1 = string.Empty,
                     operacao = processList,
                   };
 
@@ -184,6 +200,7 @@ namespace AddinFormatec {
             swFeat = (Feature)swFeat.GetNextFeature();
           }
         }
+        */
 
         rootNode.ExpandAll();
 
@@ -211,6 +228,7 @@ namespace AddinFormatec {
             string pathName = vModelPathNames[0];
 
             var nivel = swTableAnnotation.get_Text(i, 0).Trim();
+            var qtd = Convert.ToInt32(swTableAnnotation.get_Text(i, 1).Trim());
             var codigo = swTableAnnotation.get_Text(i, 2).Trim();
             var codigoMaterial = swTableAnnotation.get_Text(i, 3).Trim();
             var descricao = swTableAnnotation.get_Text(i, 4).Trim();
@@ -220,27 +238,73 @@ namespace AddinFormatec {
             var grupoProduto = swTableAnnotation.get_Text(i, 8).Trim();
             var subgrupoProduto = swTableAnnotation.get_Text(i, 9).Trim();
             var um = swTableAnnotation.get_Text(i, 10).Trim();
+            var tipoMaterial = swTableAnnotation.get_Text(i, 11).Trim();
+            var dimensoes = swTableAnnotation.get_Text(i, 12).Trim();
+            var peso = swTableAnnotation.get_Text(i, 13).Trim();
+
             TipoComponente tipo = pathName.ToLower().EndsWith("sldasm")
               ? TipoComponente.Montagem
               : !string.IsNullOrEmpty(codigo) ? TipoComponente.Peca
               : TipoComponente.ListaMaterial;
 
+            var qtd1 = (double)qtd;
+
+            var um1 = um;
+
+            var espe = 0.0;
+            var larg = 0.0;
+            var comp = 0.0;
+
+            if (tipoMaterial.ToLower() == "chapa") {
+              try {
+                var spl = dimensoes.Split('x');
+                espe = Convert.ToDouble(spl[0].Replace(".", ","));
+                larg = Convert.ToDouble(spl[1].Replace(".", ","));
+                comp = Convert.ToDouble(spl[2].Replace(".", ","));
+                qtd1 = Math.Round(Convert.ToDouble(peso.Replace(".", ",")), 4);
+                um1 = "KG";
+              } catch (Exception) {
+                MsgBox.Show($"Erro ao ler propriedade 'sgl_Dimensoes' da chapa.\r\n\r\n" +
+                  $"{pathName}", "Addin LM Projetos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw;
+              }
+            } else if (tipoMaterial.ToLower() == "laminados") {
+              try {
+                comp = Convert.ToDouble(dimensoes.Replace(".", ","));
+                qtd1 = Math.Round(comp / 1000, 4);
+                um1 = "M";
+              } catch (Exception) {
+                MsgBox.Show($"Erro ao ler propriedade 'sgl_Dimensoes' do laminado.\r\n\r\n" +
+                  $"{pathName}", "Addin LM Projetos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw;
+              }
+            }
+
+            var nvCompr = nivel.Split('.').Length;
+
             TreeComponent componente = new TreeComponent {
+              nivel_fabril = nvCompr.ToString().PadLeft(nvCompr + 1),
               codigo = tipo == TipoComponente.ListaMaterial ? codigoMaterial : codigo,
               descricao = tipo == TipoComponente.ListaMaterial ? descricaoMaterial : descricao,
               tipoComponente = tipo,
               pathName = pathName,
               configName = nomeConfig,
-              grupo = grupoProduto,
-              subGrupo = subgrupoProduto,
-              um = um,
+              grupo = !string.IsNullOrEmpty(grupoProduto) ? Convert.ToInt16(grupoProduto) : new short?(),
+              subGrupo = !string.IsNullOrEmpty(subgrupoProduto) ? Convert.ToInt16(subgrupoProduto) : new short?(),
+              um1 = um1,
+              qtd1 = qtd1,
+              espe = espe,
+              larg = larg,
+              comp = comp,
+              peso = !string.IsNullOrEmpty(peso) ? Convert.ToDouble(peso.Replace(".", ",")): 0.0,
               operacao = processo,
             };
 
-            var node = new TreeNode($"{componente.codigo} - {componente.descricao}");
+            string nodeText = $"{componente.codigo} - {componente.descricao}";
+            var node = new TreeNode(nodeText);
 
-            if (!string.IsNullOrEmpty(codigo))
-              node.Tag = componente;
+            //if (!string.IsNullOrEmpty(codigo))
+            node.Tag = componente;
 
             var iconIndex = tipo == TipoComponente.Montagem ? 0 : tipo == TipoComponente.Peca ? 1 : 2;
 
@@ -248,9 +312,9 @@ namespace AddinFormatec {
             node.SelectedImageIndex = iconIndex;
 
             if (tipo != TipoComponente.ListaMaterial && (
-              string.IsNullOrEmpty(componente.grupo) ||
-              string.IsNullOrEmpty(componente.subGrupo) ||
-              string.IsNullOrEmpty(componente.um) )) {
+              componente.grupo == null ||
+              componente.subGrupo == null ||
+              string.IsNullOrEmpty(componente.um1))) {
               node.ForeColor = Color.Red;
             } else if (tipo == TipoComponente.ListaMaterial && string.IsNullOrEmpty(componente.operacao)) {
               node.ForeColor = Color.Red;
@@ -260,7 +324,29 @@ namespace AddinFormatec {
 
             if (nivel.Contains('.')) {
               var parentLevel = nivel.Substring(0, nivel.LastIndexOf('.'));
-              nodes[parentLevel].Nodes.Add(node);
+              if (tipo == TipoComponente.ListaMaterial) {
+                bool adicionar = true;
+                foreach (TreeNode nd in nodes[parentLevel].Nodes) {
+                  TreeComponent existingComponent = (TreeComponent)nd.Tag;
+                  if (existingComponent.codigo == componente.codigo) {
+                    existingComponent.qtd1 += componente.qtd1;
+                    if (tipoMaterial.ToLower() == "laminados")
+                      existingComponent.comp += componente.comp;
+
+                    adicionar = false;
+                    break;
+                  }
+                }
+
+                if (adicionar)
+                  nodes[parentLevel].Nodes.Add(node);
+                //if (existingNode != null) {
+                //  
+                //  
+                //
+                //  
+              } else
+                nodes[parentLevel].Nodes.Add(node);
             } else {
               rootNode.Nodes.Add(node);
             }

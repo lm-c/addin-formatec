@@ -19,6 +19,7 @@ namespace AddinFormatec {
     public DbSet<MateriaPrima> MateriaPrima { get; set; } 
     public DbSet<PostgresAccess> PostgresAccess { get; set; } 
     public DbSet<CodigoMaquina> CodigoMaquina { get; set; } 
+    public DbSet<ImportacaoProjeto> ImportacaoProjeto { get; set; } 
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder) {
         modelBuilder.Conventions

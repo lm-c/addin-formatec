@@ -22,11 +22,10 @@ Propriedades Lista de Corte
 	
 Tabela Usadas
 	pw_produto
+	vw_grupo_subgrupo
 	pw_subgrupo_produto
 	pw_tipo_grupo_produto
 	vw_estrutura_produto
-	vw_estrutura_produto_recursiva
-	vw_grupo_subgrupo
 	vw_maquina
 	vw_operacao
 	vw_processo								->	Processo dos Componentes
@@ -36,16 +35,28 @@ Tabela Usadas
 Lista Materiais Addin [ListaComponentes.sldbomtbt]
 	Ordenar cima para baixo
 	Colunas/Ordem
-	00 |	POS.				| Nº DO ITEM (NÍVEL)
-	01 |	QTD.				| Valor Predeterminado
-	02 |	Nº DESENHO			| Nº DA PEÇA
-	03 |	CÓDIGO MATERIAL		| CÓDIGO MATERIAL
-	04 |	DESCRIÇÃO			| DESCRIÇÃO
-	05 |	DESCRIÇÃO MATERIAL	| DESCRIÇÃO MATERIAL
-	06 |	sw-Nome Configur.	| NOME CONFIGURAÇÃO	
-	07 |	OPERAÇÃO			| sgl_operacao
-	08 |	sgl_GrupoProduto	| GRUPO PRODUTO
-	09 |	sgl_SubgrupoProduto	| SUBGRUPO PRODUTO
-	10 |	sgl_UM				| UM PRODUTO
+	00 |	POS.						| Nº DO ITEM (NÍVEL)
+	01 |	QTD.						| Valor Predeterminado
+	02 |	Nº DESENHO					| Nº DA PEÇA
+	03 |	CÓDIGO MATERIAL				| CÓDIGO MATERIAL
+	04 |	DESCRIÇÃO					| DESCRIÇÃO
+	05 |	DESCRIÇÃO MATERIAL			| DESCRIÇÃO MATERIAL
+	06 |	sw-Nome Configur.			| NOME CONFIGURAÇÃO	
+	07 |	sgl_operacao				| OPERAÇÃO
+	08 |	sgl_GrupoProduto			| GRUPO PRODUTO
+	09 |	sgl_SubgrupoProduto			| SUBGRUPO PRODUTO
+	10 |	sgl_UM						| UM PRODUTO
+	11 |	sgl_TipoMaterial			| TIPO MATERIAL
+	12 |	sgl_Dimensoes				| DIMENSOES
+	13 |	Massa						| MASSA KG
 	
 - verificar se exixte uma forma de aredondar largura e comprimento
+
+- criar um cadastro de sigla
+- criar sequencial do numero independente da sigla
+
+
+
+// Itens para verificar
+- cadproce
+	- cadpprce

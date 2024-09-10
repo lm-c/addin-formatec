@@ -358,12 +358,14 @@
       this.msCadastroEstruturaProduto.Name = "msCadastroEstruturaProduto";
       this.msCadastroEstruturaProduto.Size = new System.Drawing.Size(285, 26);
       this.msCadastroEstruturaProduto.Text = "Cadastro de Estrutura de Produto Fabril";
+      this.msCadastroEstruturaProduto.Visible = false;
       this.msCadastroEstruturaProduto.Click += new System.EventHandler(this.MsCadastroEstruturaProduto_Click);
       // 
       // toolStripMenuItem1
       // 
       this.toolStripMenuItem1.Name = "toolStripMenuItem1";
       this.toolStripMenuItem1.Size = new System.Drawing.Size(282, 6);
+      this.toolStripMenuItem1.Visible = false;
       // 
       // msCadastroProdutoRapido
       // 
@@ -371,6 +373,7 @@
       this.msCadastroProdutoRapido.Name = "msCadastroProdutoRapido";
       this.msCadastroProdutoRapido.Size = new System.Drawing.Size(285, 26);
       this.msCadastroProdutoRapido.Text = "Cadastro de Produto Rápido Fabril";
+      this.msCadastroProdutoRapido.Visible = false;
       this.msCadastroProdutoRapido.Click += new System.EventHandler(this.MsProduto_Click);
       // 
       // UcPainelTarefas

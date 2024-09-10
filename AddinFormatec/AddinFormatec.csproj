@@ -101,23 +101,23 @@
       <HintPath>..\packages\Npgsql.4.0.6\lib\net451\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="SolidWorks.Interop.sldworks">
-      <HintPath>P:\Projetos Leonardo\00 - Dlls\SW2022\SolidWorks.Interop.sldworks.dll</HintPath>
+      <HintPath>..\..\..\..\Users\micha\Documents\Engenharia\00 - Dlls\SW2018\SolidWorks.Interop.sldworks.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="SolidWorks.Interop.swcommands">
-      <HintPath>P:\Projetos Leonardo\00 - Dlls\SW2022\SolidWorks.Interop.swcommands.dll</HintPath>
+      <HintPath>..\..\..\..\Users\micha\Documents\Engenharia\00 - Dlls\SW2018\SolidWorks.Interop.swcommands.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="SolidWorks.Interop.swconst">
-      <HintPath>P:\Projetos Leonardo\00 - Dlls\SW2022\SolidWorks.Interop.swconst.dll</HintPath>
+      <HintPath>..\..\..\..\Users\micha\Documents\Engenharia\00 - Dlls\SW2018\SolidWorks.Interop.swconst.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="SolidWorks.Interop.swdocumentmgr">
-      <HintPath>P:\Projetos Leonardo\00 - Dlls\SW2022\SolidWorks.Interop.swdocumentmgr.dll</HintPath>
+      <HintPath>..\..\..\..\Users\micha\Documents\Engenharia\00 - Dlls\SW2018\SolidWorks.Interop.swdocumentmgr.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="SolidWorks.Interop.swpublished">
-      <HintPath>P:\Projetos Leonardo\00 - Dlls\SW2022\SolidWorks.Interop.swpublished.dll</HintPath>
+      <HintPath>..\..\..\..\Users\micha\Documents\Engenharia\00 - Dlls\SW2018\SolidWorks.Interop.swpublished.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
@@ -309,6 +309,7 @@
     <Compile Include="03_classes\02_solid\DesenhosAtualizar.cs" />
     <Compile Include="03_classes\02_solid\DrawExport.cs" />
     <Compile Include="03_classes\03_sqlite\02_tabelas\CodigoMaquina.cs" />
+    <Compile Include="03_classes\03_sqlite\02_tabelas\ImportacaoProjeto.cs" />
     <Compile Include="03_classes\03_sqlite\02_tabelas\PostgresAccess.cs" />
     <Compile Include="03_classes\03_sqlite\02_tabelas\MateriaPrima.cs" />
     <Compile Include="03_classes\02_solid\Config_db.cs" />
@@ -331,6 +332,7 @@
     <Compile Include="03_classes\02_solid\Componente.cs" />
     <Compile Include="03_classes\02_solid\InfoSetting.cs" />
     <Compile Include="03_classes\02_solid\ListaCorte.cs" />
+    <Compile Include="cadireta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

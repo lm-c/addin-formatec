@@ -31,7 +31,7 @@ namespace AddinFormatec {
       try {
         using (SQLiteContexto db = new SQLiteContexto()) {
 
-          var ultRegistro = db.CodigoMaquina.Where(x => x.Sigla == sigla && x.swDocType == swDocType).OrderByDescending(x => x.Codigo).FirstOrDefault();
+          var ultRegistro = db.CodigoMaquina.OrderByDescending(x => x.Codigo).FirstOrDefault();
           var model = new CodigoMaquina();
 
           if (ultRegistro == null) {

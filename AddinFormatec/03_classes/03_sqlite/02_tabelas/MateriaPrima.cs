@@ -74,6 +74,20 @@ namespace AddinFormatec {
       }
     }
 
+    public static void Excluir() {
+      try {
+        Config_db.Carregar();
+
+        using (SQLiteContexto db = new SQLiteContexto()) {
+          db.MateriaPrima.Remove(db.MateriaPrima.FirstOrDefault(x => x.ID == model.ID));
+            db.SaveChanges();
+            ListaMateriaPrima.Remove(model);
+        }
+      } catch (Exception ex) {
+        MsgBox.Show("Erro ao Carregar Materias.", "Addin LM Projetos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
+    }
+
     public static void Carregar() {
       ListaMateriaPrima = new List<MateriaPrima>();
       try {

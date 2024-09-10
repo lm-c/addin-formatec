@@ -74,8 +74,10 @@ namespace AddinFormatec {
           return;
         }
 
-        if (_componentes.Count == 0)
-          swModel = (ModelDoc2)swApp.ActiveDoc;
+        if (_componentes.Count == 0) {
+          Toast.Warning("Favor carregar componentes primeiro.");
+          return;
+        }
 
         if (swModel.GetType() == (int)swDocumentTypes_e.swDocDRAWING) {
           Toast.Warning("Comando apenas para Peças e Montagens.");

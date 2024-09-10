@@ -113,10 +113,10 @@ namespace AddinFormatec {
 
         if (swModel.GetType() == (int)swDocumentTypes_e.swDocASSEMBLY) {
           // Inserir lista de material e pegar dados
-          string templateGeral = Config.model.ListaMontagem;
+          string templateGeral = $"{Application.StartupPath}\\01 - Addin Formatec\\ListaComponentes.sldbomtbt";
           int BomTypeGeral = (int)swBomType_e.swBomType_Indented;
           int NumberingType = (int)swNumberingType_e.swNumberingType_Detailed;
-          var swBOMAnnotationGeral = swModelDocExt.InsertBomTable3(templateGeral, 0, 1, BomTypeGeral, swConf.Name, false, NumberingType, DetailedCutList: true);
+          var swBOMAnnotationGeral = swModelDocExt.InsertBomTable3(templateGeral, 0, 1, BomTypeGeral, swConf.Name, false, NumberingType, DetailedCutList: false);
           PegaDadosListaGeral(swBOMAnnotationGeral, _listaDraw, indexTree, gerarTodaHierarquia);
           ListaCorte.ExcluirLista(swModel);
         }
@@ -145,7 +145,7 @@ namespace AddinFormatec {
 
         var swBOMFeature = swBOMAnnotation.BomFeature;
 
-        for (int i = lStartRow; i >= 0; i--) {
+        for (int i = 0; i < swTableAnnotation.TotalRowCount; i++) {
           vModelPathNames = (string[])swBOMAnnotation.GetModelPathNames(i, out strItemNumber, out strPartNumber);
 
           if (vModelPathNames != null) {
@@ -153,12 +153,15 @@ namespace AddinFormatec {
             string ptNm = vModelPathNames[0];
 
             drawExport.PathName = ptNm.Substring(0, ptNm.Length - 6) + "SLDDRW";
-            drawExport.NomeComponente = swTableAnnotation.get_Text(i, 1).Trim();
+            drawExport.NomeComponente = Path.GetFileNameWithoutExtension(ptNm).ToUpper();
+
+            if (!string.IsNullOrEmpty(swTableAnnotation.get_Text(i, 3).Trim()))
+              continue;
 
             if (!File.Exists(drawExport.PathName) || string.IsNullOrEmpty(drawExport.NomeComponente))
               continue;
 
-            if (int.TryParse(swTableAnnotation.get_Text(i, 3).Trim(), out int qtd)) {
+            if (int.TryParse(swTableAnnotation.get_Text(i, 1).Trim(), out int qtd)) {
               if (!gerarTodaHierarquia && listaDraw.Any(x => x.NomeComponente == drawExport.NomeComponente)) {
                 var item = listaDraw.Where(x => x.NomeComponente == drawExport.NomeComponente).FirstOrDefault();
                 item.Quantidade += qtd;
@@ -169,7 +172,7 @@ namespace AddinFormatec {
               drawExport.Tipo = ptNm.ToUpper().EndsWith("SLDPRT") ? swDocumentTypes_e.swDocPART : swDocumentTypes_e.swDocASSEMBLY;
 
               drawExport.IndexTree = indexTree;
-              drawExport.Denominacao = swTableAnnotation.get_Text(i, 2).Trim();
+              drawExport.Denominacao = swTableAnnotation.get_Text(i, 4).Trim();
               drawExport.Exportar = true;
               drawExport.Quantidade = qtd;
               listaDraw.Add(drawExport);
@@ -194,7 +197,7 @@ namespace AddinFormatec {
 
         var swBOMFeature = swBOMAnnotation.BomFeature;
 
-        for (int i = lStartRow; i >= 0; i--) {
+        for (int i = 0; i < swTableAnnotation.TotalRowCount; i++) {
           vModelPathNames = (string[])swBOMAnnotation.GetModelPathNames(i, out strItemNumber, out strPartNumber);
 
           if (vModelPathNames != null) {
@@ -204,13 +207,13 @@ namespace AddinFormatec {
             drawExport.PathName = pathName;
 
             drawExport.IndexTree = Convert.ToInt32(swTableAnnotation.get_Text(i, 0));
-            drawExport.NomeComponente = swTableAnnotation.get_Text(i, 1).Trim();
+            drawExport.NomeComponente = swTableAnnotation.get_Text(i, 2).Trim();
 
             if (string.IsNullOrEmpty(drawExport.NomeComponente))
               continue;
 
-            if (int.TryParse(swTableAnnotation.get_Text(i, 3).Trim(), out int qtd)) {
-              drawExport.Denominacao = swTableAnnotation.get_Text(i, 2).Trim();
+            if (int.TryParse(swTableAnnotation.get_Text(i, 1).Trim(), out int qtd)) {
+              drawExport.Denominacao = swTableAnnotation.get_Text(i, 4).Trim();
 
               if (listaPecas.Any(x => x.NomeComponente == drawExport.NomeComponente)) {
                 var item = listaPecas.Where(x => x.NomeComponente == drawExport.NomeComponente).FirstOrDefault();
@@ -270,10 +273,10 @@ namespace AddinFormatec {
         swCustPropMngr = swModelDocExt.get_CustomPropertyManager("");
 
         if (swModel.GetType() == (int)swDocumentTypes_e.swDocASSEMBLY) {
-          string templatePecas = Config.model.ListaMontagem;
+          string templateGeral = $"{Application.StartupPath}\\01 - Addin Formatec\\ListaComponentes.sldbomtbt";
           int BomTypePeca = (int)swBomType_e.swBomType_PartsOnly;
           int NumberingType = (int)swNumberingType_e.swNumberingType_Detailed;
-          var swBOMAnnotationPecas = swModelDocExt.InsertBomTable3(templatePecas, 0, 1, BomTypePeca, swConf.Name, Hidden: false, NumberingType, DetailedCutList: true);
+          var swBOMAnnotationPecas = swModelDocExt.InsertBomTable3(templateGeral, 0, 1, BomTypePeca, swConf.Name, Hidden: false, NumberingType, DetailedCutList: false);
           PegaDadosListaPecas(swBOMAnnotationPecas, listaPecas);
           ListaCorte.ExcluirLista(swModel);
         }

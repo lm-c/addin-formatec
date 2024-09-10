@@ -49,7 +49,7 @@
       this.ckbSituacao.Name = "ckbSituacao";
       this.ckbSituacao.Propriedade = "Ativo";
       this.ckbSituacao.Size = new System.Drawing.Size(57, 19);
-      this.ckbSituacao.TabIndex = 5;
+      this.ckbSituacao.TabIndex = 3;
       this.ckbSituacao.Text = "Ativo";
       this.ckbSituacao.UseSelectable = true;
       // 
@@ -95,13 +95,14 @@
       this.txtEspessura.MaxLength = 15;
       this.txtEspessura.Name = "txtEspessura";
       this.txtEspessura.PasswordChar = '\0';
+      this.txtEspessura.Propriedade = null;
       this.txtEspessura.ScrollBars = System.Windows.Forms.ScrollBars.None;
       this.txtEspessura.SelectedText = "";
       this.txtEspessura.SelectionLength = 0;
       this.txtEspessura.SelectionStart = 0;
       this.txtEspessura.ShortcutsEnabled = true;
       this.txtEspessura.Size = new System.Drawing.Size(185, 30);
-      this.txtEspessura.TabIndex = 2;
+      this.txtEspessura.TabIndex = 1;
       this.txtEspessura.UnderlinedStyle = false;
       this.txtEspessura.UseSelectable = true;
       this.txtEspessura.Valor = LmCorbieUI.Design.LmValueType.Num_Real;
@@ -159,7 +160,7 @@
       this.btnSalvar.Location = new System.Drawing.Point(150, 198);
       this.btnSalvar.Name = "btnSalvar";
       this.btnSalvar.Size = new System.Drawing.Size(100, 26);
-      this.btnSalvar.TabIndex = 6;
+      this.btnSalvar.TabIndex = 4;
       this.btnSalvar.Text = " &Salvar";
       this.btnSalvar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.btnSalvar.UseVisualStyleBackColor = false;
@@ -175,10 +176,10 @@
       this.btnLimpar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.btnLimpar.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpar.Image")));
       this.btnLimpar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-      this.btnLimpar.Location = new System.Drawing.Point(256, 198);
+      this.btnLimpar.Location = new System.Drawing.Point(362, 198);
       this.btnLimpar.Name = "btnLimpar";
       this.btnLimpar.Size = new System.Drawing.Size(100, 26);
-      this.btnLimpar.TabIndex = 7;
+      this.btnLimpar.TabIndex = 6;
       this.btnLimpar.Text = " &Limpar";
       this.btnLimpar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.btnLimpar.UseVisualStyleBackColor = false;
@@ -195,14 +196,13 @@
       this.btnExcluir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.btnExcluir.Image = ((System.Drawing.Image)(resources.GetObject("btnExcluir.Image")));
       this.btnExcluir.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-      this.btnExcluir.Location = new System.Drawing.Point(500, 198);
+      this.btnExcluir.Location = new System.Drawing.Point(256, 198);
       this.btnExcluir.Name = "btnExcluir";
       this.btnExcluir.Size = new System.Drawing.Size(100, 26);
-      this.btnExcluir.TabIndex = 343;
+      this.btnExcluir.TabIndex = 5;
       this.btnExcluir.Text = " E&xcluir";
       this.btnExcluir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.btnExcluir.UseVisualStyleBackColor = false;
-      this.btnExcluir.Visible = false;
       this.btnExcluir.Click += new System.EventHandler(this.BtnExcluir_Click);
       // 
       // lblID
@@ -248,6 +248,7 @@
       this.txtMaterial.MaxLength = 250;
       this.txtMaterial.Name = "txtMaterial";
       this.txtMaterial.PasswordChar = '\0';
+      this.txtMaterial.Propriedade = null;
       this.txtMaterial.ScrollBars = System.Windows.Forms.ScrollBars.None;
       this.txtMaterial.SelectedText = "";
       this.txtMaterial.SelectionLength = 0;
@@ -255,7 +256,7 @@
       this.txtMaterial.ShortcutsEnabled = true;
       this.txtMaterial.ShowButtonF7 = true;
       this.txtMaterial.Size = new System.Drawing.Size(450, 30);
-      this.txtMaterial.TabIndex = 4;
+      this.txtMaterial.TabIndex = 2;
       this.txtMaterial.UnderlinedStyle = false;
       this.txtMaterial.UseSelectable = true;
       this.txtMaterial.Valor = LmCorbieUI.Design.LmValueType.ComboBox;

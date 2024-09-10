@@ -75,7 +75,7 @@ namespace AddinFormatec {
         }
 
         // Inserir lista de material e pegar dados
-        string templateGeral = Config.model.ListaMontagem;
+        string templateGeral = $"{Application.StartupPath}\\01 - Addin Formatec\\ListaComponentes.sldbomtbt";
         int BomTypeGeral = (int)swBomType_e.swBomType_Indented;
         int NumberingType = (int)swNumberingType_e.swNumberingType_Detailed;
         var swBOMAnnotationGeral = swModelDocExt.InsertBomTable3(templateGeral, 0, 1, BomTypeGeral, swConf.Name, Hidden: false, NumberingType, DetailedCutList: true);
@@ -102,12 +102,12 @@ namespace AddinFormatec {
 
         var swBOMFeature = swBOMAnnotation.BomFeature;
 
-        for (int i = lStartRow; i >= 0; i--) {
+        for (int i = 0; i < swTableAnnotation.TotalRowCount; i++) {
           vModelPathNames = (string[])swBOMAnnotation.GetModelPathNames(i, out strItemNumber, out strPartNumber);
 
           if (vModelPathNames != null) {
             string pathName = vModelPathNames[0];
-            string nomeComp = swTableAnnotation.get_Text(i, 1).Trim();
+            string nomeComp = swTableAnnotation.get_Text(i, 2).Trim();
 
             if (string.IsNullOrEmpty(nomeComp))
               continue;
@@ -128,7 +128,7 @@ namespace AddinFormatec {
               swConfMgr = swModel.ConfigurationManager;
               swConf = swConfMgr.ActiveConfiguration;
 
-              if (int.TryParse(swTableAnnotation.get_Text(i, 3).Trim(), out int qtd)) {
+              if (int.TryParse(swTableAnnotation.get_Text(i, 1).Trim(), out int qtd)) {
                 if (listaProcessoFabricacao.Any(x => x.NomeComponente == nomeComp)) {
                   var item = listaProcessoFabricacao.Where(x => x.NomeComponente == nomeComp).FirstOrDefault();
                   item.QtdItem += qtd;
